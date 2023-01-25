@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
+import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,9 @@ class PesawatApp extends StatelessWidget {
         },
         GetStartedPages.routeName: (context) {
           return const GetStartedPages();
+        },
+        SignUpPage.routeName: (context) {
+          return const SignUpPage();
         }
       },
     );

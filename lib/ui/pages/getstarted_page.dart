@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedPages extends StatelessWidget {
@@ -54,7 +55,9 @@ class GetStartedPages extends StatelessWidget {
                       top: 50,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, SignUpPage.routeName);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
                         shape: RoundedRectangleBorder(
