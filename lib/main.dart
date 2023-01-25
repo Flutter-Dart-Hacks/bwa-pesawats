@@ -1,3 +1,5 @@
+import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
+import 'package:bwa_pesawats/ui/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +26,15 @@ class PesawatApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: SplashPages.routeName,
+      routes: {
+        SplashPages.routeName: (context) {
+          return const SplashPages();
+        },
+        GetStartedPages.routeName: (context) {
+          return const GetStartedPages();
+        }
+      },
     );
   }
 }
