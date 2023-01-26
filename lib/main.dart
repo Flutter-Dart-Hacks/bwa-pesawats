@@ -1,3 +1,4 @@
+import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
@@ -37,6 +38,9 @@ class PesawatApp extends StatelessWidget {
         },
         SignUpPage.routeName: (context) {
           return const SignUpPage();
+        },
+        BonusPage.routeName: (context) {
+          return const BonusPage();
         }
       },
     );

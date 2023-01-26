@@ -34,9 +34,13 @@ class _SplashPagesState extends State<SplashPages> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                alignment: Alignment.center,
                 width: 100,
                 height: 100,
-                margin: const EdgeInsets.only(bottom: 50, right: 15),
+                margin: const EdgeInsets.only(
+                  bottom: 50,
+                  right: 10,
+                ),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('resources/icon_plane.png'),
