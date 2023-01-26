@@ -16,7 +16,7 @@ class SplashPages extends StatefulWidget {
 class _SplashPagesState extends State<SplashPages> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushNamedAndRemoveUntil(
           context, GetStartedPages.routeName, (route) => false);
     });
