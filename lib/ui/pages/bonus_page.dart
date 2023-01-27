@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class BonusPage extends StatefulWidget {
@@ -132,7 +133,9 @@ class _BonusPageState extends State<BonusPage> {
           top: 50,
         ),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, MainPage.routeName);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryColor,
             shape: RoundedRectangleBorder(
