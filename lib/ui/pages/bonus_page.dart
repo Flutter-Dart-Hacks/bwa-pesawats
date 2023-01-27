@@ -11,12 +11,16 @@ class BonusPage extends StatefulWidget {
 }
 
 class _BonusPageState extends State<BonusPage> {
+  final ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 0.0);
+
   @override
   Widget build(BuildContext context) {
     Widget getBonusCard() {
       return Container(
         width: 300,
         height: 211,
+        margin: const EdgeInsets.only(top: 140),
         padding: EdgeInsets.all(defaultMargin),
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -32,6 +36,7 @@ class _BonusPageState extends State<BonusPage> {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -63,10 +68,84 @@ class _BonusPageState extends State<BonusPage> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                )
+                ),
+                Text(
+                  'Pay',
+                  style:
+                      whiteTextStyle.copyWith(fontWeight: medium, fontSize: 16),
+                ),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Text(
+              'Balance',
+              style: whiteTextStyle.copyWith(
+                fontWeight: light,
+                fontSize: 14,
+              ),
+              textAlign: TextAlign.start,
+            ),
+            Text(
+              'IDR 280.000.000',
+              style: whiteTextStyle.copyWith(
+                fontWeight: medium,
+                fontSize: 26,
+              ),
+              textAlign: TextAlign.start,
+            ),
           ],
+        ),
+      );
+    }
+
+    Widget getTitle() {
+      return Container(
+        margin: const EdgeInsets.only(top: 70),
+        child: Text(
+          'Big Bonus 🎉',
+          style: blackTextStyle.copyWith(fontWeight: semiBold, fontSize: 32),
+        ),
+      );
+    }
+
+    Widget getSubtitle() {
+      return Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: Text(
+          'We give you early credit so that\nyou can buy a flight ticket',
+          style: greyTextStyle.copyWith(
+            fontWeight: light,
+            fontSize: 16,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
+    Widget getStartFlyButton() {
+      return Container(
+        width: 220,
+        height: 55,
+        margin: const EdgeInsets.only(
+          top: 50,
+        ),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(defaultRadius),
+              ),
+            ),
+            elevation: 18,
+          ),
+          child: Text(
+            'Start Fly Now',
+            style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium),
+          ),
         ),
       );
     }
@@ -75,12 +154,23 @@ class _BonusPageState extends State<BonusPage> {
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         bottom: false,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getBonusCard(),
-            ],
+        child: Scrollbar(
+          controller: _scrollController,
+          trackVisibility: true,
+          thumbVisibility: true,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  getBonusCard(),
+                  getTitle(),
+                  getSubtitle(),
+                  getStartFlyButton(),
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -39,7 +39,7 @@ class _SplashPagesState extends State<SplashPages> {
                 height: 100,
                 margin: const EdgeInsets.only(
                   bottom: 50,
-                  right: 10,
+                  right: 4,
                 ),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
