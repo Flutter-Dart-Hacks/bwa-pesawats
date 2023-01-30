@@ -1,5 +1,6 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
 
 class BonusPage extends StatefulWidget {
@@ -126,30 +127,13 @@ class _BonusPageState extends State<BonusPage> {
     }
 
     Widget getStartFlyButton() {
-      return Container(
+      return CustomButtonPrimary(
+        title: 'Start Fly Now',
+        onPressedFunction: () {
+          Navigator.pushNamed(context, MainPage.routeName);
+        },
         width: 220,
-        height: 55,
-        margin: const EdgeInsets.only(
-          top: 50,
-        ),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, MainPage.routeName);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(defaultRadius),
-              ),
-            ),
-            elevation: 18,
-          ),
-          child: Text(
-            'Start Fly Now',
-            style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium),
-          ),
-        ),
+        margin: const EdgeInsets.only(top: 50),
       );
     }
 

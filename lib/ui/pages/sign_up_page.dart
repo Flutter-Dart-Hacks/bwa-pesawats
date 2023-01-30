@@ -1,5 +1,7 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_text_formfield.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -38,256 +40,85 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget getInputSection() {
       Widget setNamaLengkap() {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Full Name',
-                style:
-                    blackTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                controller: _controllerFullName,
-                keyboardType: TextInputType.text,
-                cursorColor: kBlackColor,
-                cursorWidth: 2,
-                decoration: InputDecoration(
-                  isDense: true,
-                  hintText: 'insert your full name',
-                  hintStyle:
-                      greyTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kPrimaryColor,
-                      width: 3,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                ),
-                style: blackTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 16,
-                ),
-              )
-            ],
+        return CustomTextFormField(
+          controller: _controllerFullName,
+          title: 'Full Name',
+          hintTitle: 'insert your full name',
+          inputType: TextInputType.text,
+          margin: const EdgeInsets.only(
+            bottom: 20,
+            top: 20,
           ),
         );
       }
 
       Widget setEmailAddress() {
-        return Container(
+        return CustomTextFormField(
+          controller: _controllerEmail,
+          title: 'Email Address',
+          hintTitle: 'insert your email address',
+          inputType: TextInputType.emailAddress,
           margin: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Email Address',
-                style:
-                    blackTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                controller: _controllerEmail,
-                keyboardType: TextInputType.emailAddress,
-                cursorColor: kBlackColor,
-                cursorWidth: 2,
-                decoration: InputDecoration(
-                  isDense: true,
-                  hintText: 'insert your email address',
-                  hintStyle:
-                      greyTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kPrimaryColor,
-                      width: 3,
-                    ),
-                  ),
-                ),
-                style: blackTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
         );
       }
 
       Widget setPasswordInput() {
-        return Container(
+        return CustomTextFormField(
+          controller: _controllerPassword,
+          title: 'Password',
+          hintTitle: 'insert your password',
+          inputType: TextInputType.text,
           margin: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Password',
-                style:
-                    blackTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                controller: _controllerPassword,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                cursorColor: kBlackColor,
-                cursorWidth: 2,
-                decoration: InputDecoration(
-                  isDense: true,
-                  hintText: 'insert your password',
-                  hintStyle:
-                      greyTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kPrimaryColor,
-                      width: 3,
-                    ),
-                  ),
-                ),
-                style: blackTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
+          isObscureText: true,
         );
       }
 
       Widget setHobbyInput() {
-        return Container(
+        return CustomTextFormField(
+          controller: _controllerHobby,
+          title: 'Hobby',
+          hintTitle: 'insert your hobby',
+          inputType: TextInputType.text,
           margin: const EdgeInsets.only(bottom: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Hobby',
-                style:
-                    blackTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                controller: _controllerHobby,
-                keyboardType: TextInputType.text,
-                cursorColor: kBlackColor,
-                cursorWidth: 2,
-                decoration: InputDecoration(
-                  isDense: true,
-                  hintText: 'insert your hobby',
-                  hintStyle:
-                      greyTextStyle.copyWith(fontWeight: regular, fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kPrimaryColor,
-                      width: 3,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: kInactiveColor,
-                      width: 1,
-                    ),
-                  ),
-                ),
-                style: blackTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
         );
       }
 
       Widget submitButtonForm() {
-        return Container(
-          width: double.infinity,
-          height: 55,
-          margin: const EdgeInsets.only(
-            top: 30,
-          ),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, BonusPage.routeName);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: kPrimaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(defaultRadius),
-                ),
-              ),
-              elevation: 15,
+        // return Container(
+        //   width: double.infinity,
+        //   height: 55,
+        //   margin: const EdgeInsets.only(
+        //     top: 30,
+        //   ),
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, BonusPage.routeName);
+        //     },
+        //     style: ElevatedButton.styleFrom(
+        //       backgroundColor: kPrimaryColor,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.all(
+        //           Radius.circular(defaultRadius),
+        //         ),
+        //       ),
+        //       elevation: 15,
+        //     ),
+        //     child: Text(
+        //       'Get Started',
+        //       style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium),
+        //     ),
+        //   ),
+        // );
+        return CustomButtonPrimary(
+            title: 'Get Started',
+            width: double.infinity,
+            margin: const EdgeInsets.only(
+              top: 30,
+              bottom: 80,
             ),
-            child: Text(
-              'Get Started',
-              style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium),
-            ),
-          ),
-        );
+            onPressedFunction: () {
+              return Navigator.pushNamed(context, BonusPage.routeName);
+            });
       }
 
       return Container(

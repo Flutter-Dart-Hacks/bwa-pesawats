@@ -1,5 +1,6 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedPages extends StatelessWidget {
@@ -48,30 +49,13 @@ class GetStartedPages extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  Container(
+                  CustomButtonPrimary(
+                    title: 'Get Started',
+                    onPressedFunction: () {
+                      Navigator.pushNamed(context, SignUpPage.routeName);
+                    },
                     width: 220,
-                    height: 55,
-                    margin: const EdgeInsets.only(
-                      top: 50,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, SignUpPage.routeName);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(defaultRadius),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'Get Started',
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 18, fontWeight: medium),
-                      ),
-                    ),
+                    margin: const EdgeInsets.only(top: 50, bottom: 80),
                   ),
                   const SizedBox(
                     height: 80,

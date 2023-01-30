@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/pages/home_pages.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_bottom_navitem.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  Widget createBuildContent(BuildContext context) {
+    return const HomePages();
+  }
+
   Widget createCustomBottomNavigation(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -67,7 +72,7 @@ class _MainPageState extends State<MainPage> {
         bottom: false,
         child: Stack(
           children: [
-            const Text('Main page'),
+            createBuildContent(context),
             createCustomBottomNavigation(context)
           ],
         ),
