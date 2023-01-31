@@ -52,7 +52,7 @@ class _BonusPageState extends State<BonusPage> {
                             fontWeight: light, fontSize: 14),
                       ),
                       Text(
-                        'Denise Joe',
+                        'John Doe',
                         style: whiteTextStyle.copyWith(
                             fontWeight: medium, fontSize: 20),
                         overflow: TextOverflow.ellipsis,
