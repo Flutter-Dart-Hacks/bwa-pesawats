@@ -31,9 +31,9 @@ class DestinationCard extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: kGreyColor,
-            blurRadius: 7,
+            blurRadius: 3,
             spreadRadius: 0,
-            offset: Offset(0, 5),
+            offset: Offset(0, 3),
           ),
         ],
       ),

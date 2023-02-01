@@ -114,9 +114,10 @@ class _HomePagesState extends State<HomePages> {
     Widget createDestinationList(BuildContext context) {
       return Container(
         margin: EdgeInsets.only(
-          top: 20,
+          top: 10,
           left: defaultMargin,
           right: defaultMargin,
+          bottom: 140,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +127,36 @@ class _HomePagesState extends State<HomePages> {
               style:
                   blackTextStyle.copyWith(fontSize: 18, fontWeight: semiBold),
             ),
-            const DestinationListItem(),
+            const DestinationListItem(
+              name: 'Danau Beratan',
+              city: 'Singajara',
+              imageUrl: 'resources/image_destination6.png',
+              rating: 4.5,
+            ),
+            const DestinationListItem(
+              name: 'Sidney Opera',
+              city: 'Australia',
+              imageUrl: 'resources/image_destination7.png',
+              rating: 4.7,
+            ),
+            const DestinationListItem(
+              name: 'Roma',
+              city: 'Italy',
+              imageUrl: 'resources/image_destination8.png',
+              rating: 4.8,
+            ),
+            const DestinationListItem(
+              name: 'Payung Teduh',
+              city: 'Singapore',
+              imageUrl: 'resources/image_destination9.png',
+              rating: 4.5,
+            ),
+            const DestinationListItem(
+              name: 'Hill Hey',
+              city: 'Monaco',
+              imageUrl: 'resources/image_destination10.png',
+              rating: 4.7,
+            ),
           ],
         ),
       );
