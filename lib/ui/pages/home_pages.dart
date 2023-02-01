@@ -1,5 +1,6 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/widgets/destination_card.dart';
+import 'package:bwa_pesawats/ui/widgets/destination_list_item.dart';
 import 'package:flutter/material.dart';
 
 class HomePages extends StatefulWidget {
@@ -110,12 +111,34 @@ class _HomePagesState extends State<HomePages> {
       );
     }
 
+    Widget createDestinationList(BuildContext context) {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 20,
+          left: defaultMargin,
+          right: defaultMargin,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'New This Year',
+              style:
+                  blackTextStyle.copyWith(fontSize: 18, fontWeight: semiBold),
+            ),
+            const DestinationListItem(),
+          ],
+        ),
+      );
+    }
+
     return Container(
       margin: const EdgeInsets.all(0),
       child: ListView(
         children: [
           createHeader(context),
           createPopulerDestination(context),
+          createDestinationList(context),
         ],
       ),
     );
