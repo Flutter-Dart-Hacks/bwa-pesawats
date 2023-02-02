@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
+import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
@@ -45,6 +46,9 @@ class PesawatApp extends StatelessWidget {
         },
         MainPage.routeName: (context) {
           return const MainPage();
+        },
+        DetailDestination.routeName: (context) {
+          return const DetailDestination();
         }
       },
     );
@@ -147,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
