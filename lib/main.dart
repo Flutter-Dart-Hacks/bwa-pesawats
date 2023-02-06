@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
+import 'package:bwa_pesawats/ui/pages/choose_seat_page.dart';
 import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
@@ -49,6 +50,9 @@ class PesawatApp extends StatelessWidget {
         },
         DetailDestination.routeName: (context) {
           return const DetailDestination();
+        },
+        ChooseSeatPage.routeName: (context) {
+          return const ChooseSeatPage();
         }
       },
     );
