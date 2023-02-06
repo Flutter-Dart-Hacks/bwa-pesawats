@@ -1,4 +1,7 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
+import 'package:bwa_pesawats/ui/widgets/interest_item.dart';
+import 'package:bwa_pesawats/ui/widgets/photo_items.dart';
 import 'package:flutter/material.dart';
 
 class DetailDestination extends StatefulWidget {
@@ -127,6 +130,135 @@ class _DetailDestinationState extends State<DetailDestination> {
                   ),
                 ],
               ),
+            ),
+            // NOTE : DESKRIPSI DETAIL
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 30,
+              ),
+              decoration: BoxDecoration(
+                color: kWhiteColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // NOTE: ABOUT
+                  Text(
+                    'About',
+                    style: blackTextStyle.copyWith(
+                        fontWeight: semiBold, fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    'Berada di jalur jalan provinsi yang menghubungkan Denpasar Singaraja serta letaknya yang dekat dengan Kebun Raya Eka Karya menjadikan tempat Bali.',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: regular,
+                      height: 2,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // NOTE: PHOTOS ABOUT
+                  Text(
+                    'Photos',
+                    style: blackTextStyle.copyWith(
+                        fontWeight: semiBold, fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  SizedBox(
+                    height: 80,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: const [
+                          PhotoItems(imageUrl: 'resources/image_photo1.png'),
+                          PhotoItems(imageUrl: 'resources/image_photo2.png'),
+                          PhotoItems(imageUrl: 'resources/image_photo3.png'),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // NOTE INTEREST
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Interests',
+                    style: blackTextStyle.copyWith(
+                        fontWeight: semiBold, fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    children: const [
+                      InterestsItem(interestName: 'Kids Park'),
+                      InterestsItem(interestName: 'Honor Bridge')
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      InterestsItem(interestName: 'City Museum'),
+                      InterestsItem(interestName: 'Central Mall')
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // NOTE: PRICE AND BOOK BUTTON
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                top: 30,
+                bottom: 30,
+              ),
+              child: Row(
+                children: [
+                  // NOTE PRICE HARGA
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'IDR 2.500.000',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: medium,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'per orang',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: light,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: CustomButtonPrimary(
+                      title: 'Book Now',
+                      onPressedFunction: () {},
+                      width: double.infinity,
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),
@@ -136,14 +268,16 @@ class _DetailDestinationState extends State<DetailDestination> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(0),
-          child: Stack(
-            children: [
-              createBackgroundImage(),
-              createShadowBox(),
-              createBodyContent(),
-            ],
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                createBackgroundImage(),
+                createShadowBox(),
+                createBodyContent(),
+              ],
+            ),
           ),
         ),
       ),
