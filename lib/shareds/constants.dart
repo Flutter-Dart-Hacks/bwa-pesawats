@@ -1,3 +1,3 @@
-const STATUS_AVAILABLE = 0;
-const STATUS_SELECTED = 1;
-const STATUS_UNAVAILABLE = 2;
+const statusAvailable = 0;
+const statusSelected = 1;
+const statusUnavailable = 2;

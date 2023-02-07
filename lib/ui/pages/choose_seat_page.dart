@@ -1,5 +1,6 @@
 import 'package:bwa_pesawats/shareds/constants.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/seatstatus_item.dart';
 import 'package:flutter/material.dart';
 
@@ -189,10 +190,10 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const SeatItem(
-                    statusSeat: STATUS_UNAVAILABLE,
+                    statusSeat: statusUnavailable,
                   ),
                   const SeatItem(
-                    statusSeat: STATUS_UNAVAILABLE,
+                    statusSeat: statusUnavailable,
                   ),
                   Container(
                     width: 48,
@@ -210,15 +211,237 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                     ),
                   ),
                   const SeatItem(
-                    statusSeat: STATUS_SELECTED,
+                    statusSeat: statusAvailable,
                   ),
                   const SeatItem(
-                    statusSeat: STATUS_AVAILABLE,
+                    statusSeat: statusUnavailable,
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE: SEAT ROW 2
+            Container(
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '2',
+                        style: greyTextStyle.copyWith(
+                            fontWeight: regular, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusUnavailable,
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE: SEAT ROW 3
+            Container(
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SeatItem(
+                    statusSeat: statusSelected,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusSelected,
+                  ),
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '3',
+                        style: greyTextStyle.copyWith(
+                            fontWeight: regular, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE: SEAT ROW 4
+            Container(
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusUnavailable,
+                  ),
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '4',
+                        style: greyTextStyle.copyWith(
+                            fontWeight: regular, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE: SEAT ROW 5
+            Container(
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '5',
+                        style: greyTextStyle.copyWith(
+                            fontWeight: regular, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SeatItem(
+                    statusSeat: statusUnavailable,
+                  ),
+                  const SeatItem(
+                    statusSeat: statusAvailable,
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE YOUR SEAT PRICE
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                top: 30,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Your seat',
+                      style: greyTextStyle.copyWith(
+                          fontSize: 14, fontWeight: light),
+                    ),
+                  ),
+                  Text(
+                    'A3, B3',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // NOTE TOTAL PRICE
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Total',
+                      style: greyTextStyle.copyWith(
+                          fontSize: 14, fontWeight: light),
+                    ),
+                  ),
+                  Text(
+                    'IDR 540.000.000',
+                    style: purpleTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: bold,
+                    ),
                   ),
                 ],
               ),
             )
           ],
+        ),
+      );
+    }
+
+    Widget createCheckoutButton() {
+      return Container(
+        margin: const EdgeInsets.only(
+          top: 30,
+          bottom: 50,
+        ),
+        width: double.infinity,
+        child: CustomButtonPrimary(
+          title: 'Continue to Checkout',
+          onPressedFunction: () {},
         ),
       );
     }
@@ -235,6 +458,7 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
             createTitle(),
             createSeatStatus(),
             selectSeats(),
+            createCheckoutButton(),
           ],
         ),
       ),

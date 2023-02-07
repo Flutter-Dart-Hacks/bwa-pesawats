@@ -11,14 +11,48 @@ class SeatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     getBackgroundColor() {
       switch (statusSeat) {
-        case STATUS_AVAILABLE:
+        case statusAvailable:
           return kAvailableColor;
-        case STATUS_SELECTED:
+        case statusSelected:
           return kPrimaryColor;
-        case STATUS_UNAVAILABLE:
+        case statusUnavailable:
           return kUnavailableColor;
         default:
           return kUnavailableColor;
+      }
+    }
+
+    getBorderColor() {
+      switch (statusSeat) {
+        case statusAvailable:
+          return kPrimaryColor;
+        case statusSelected:
+          return kPrimaryColor;
+        case statusUnavailable:
+          return kUnavailableColor;
+        default:
+          return kUnavailableColor;
+      }
+    }
+
+    getStatusText() {
+      switch (statusSeat) {
+        case statusAvailable:
+          return const SizedBox();
+        case statusSelected:
+          return Center(
+            child: Text(
+              'YOU',
+              style: whiteTextStyle.copyWith(
+                fontWeight: semiBold,
+                fontSize: 14,
+              ),
+            ),
+          );
+        case statusUnavailable:
+          return const SizedBox();
+        default:
+          return const SizedBox();
       }
     }
 
@@ -26,8 +60,15 @@ class SeatItem extends StatelessWidget {
       width: 48,
       height: 48,
       decoration: BoxDecoration(
-        color: kUnavailableColor,
+        color: getBackgroundColor(),
         borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: getBorderColor(),
+          width: 2,
+        ),
+      ),
+      child: Center(
+        child: getStatusText(),
       ),
     );
   }
