@@ -234,7 +234,7 @@ class _DetailDestinationState extends State<DetailDestination> {
                         Text(
                           'IDR 2.500.000',
                           style: blackTextStyle.copyWith(
-                            fontWeight: medium,
+                            fontWeight: semiBold,
                             fontSize: 18,
                           ),
                         ),

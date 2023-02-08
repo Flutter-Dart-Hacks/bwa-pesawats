@@ -1,5 +1,6 @@
 import 'package:bwa_pesawats/shareds/constants.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/seatstatus_item.dart';
 import 'package:flutter/material.dart';
@@ -441,7 +442,9 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
         width: double.infinity,
         child: CustomButtonPrimary(
           title: 'Continue to Checkout',
-          onPressedFunction: () {},
+          onPressedFunction: () {
+            Navigator.pushNamed(context, CheckoutPage.routeName);
+          },
         ),
       );
     }
