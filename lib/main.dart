@@ -6,6 +6,7 @@ import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
+import 'package:bwa_pesawats/ui/pages/success_checkout_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -58,6 +59,9 @@ class PesawatApp extends StatelessWidget {
         CheckoutPage.routeName: (context) {
           return const CheckoutPage();
         },
+        SuccessCheckoutPage.routeName: (context) {
+          return const SuccessCheckoutPage();
+        }
       },
     );
   }

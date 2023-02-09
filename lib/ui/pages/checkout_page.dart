@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/shareds/themes.dart';
+import 'package:bwa_pesawats/ui/pages/success_checkout_page.dart';
 import 'package:bwa_pesawats/ui/widgets/booking_detail_item.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
@@ -331,7 +332,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
         margin: const EdgeInsets.only(bottom: 30),
         child: CustomButtonPrimary(
           title: 'Pay Now',
-          onPressedFunction: () {},
+          onPressedFunction: () {
+            Navigator.pushNamed(context, SuccessCheckoutPage.routeName);
+          },
         ),
       );
     }
