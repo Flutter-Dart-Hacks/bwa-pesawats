@@ -1,7 +1,12 @@
+import 'package:bwa_pesawats/cubits/cubit/page_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/home_pages.dart';
+import 'package:bwa_pesawats/ui/pages/settings_page.dart';
+import 'package:bwa_pesawats/ui/pages/transaction_page.dart';
+import 'package:bwa_pesawats/ui/pages/wallet_pages.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_bottom_navitem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,8 +18,19 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  Widget createBuildContent(BuildContext context) {
-    return const HomePages();
+  Widget createBuildContent(BuildContext context, int currentIndex) {
+    switch (currentIndex) {
+      case 0:
+        return const HomePages();
+      case 1:
+        return const TransactionPage();
+      case 2:
+        return const WalletPage();
+      case 3:
+        return const SettingsPage();
+      default:
+        return const HomePages();
+    }
   }
 
   Widget createCustomBottomNavigation(BuildContext context) {
@@ -43,18 +59,22 @@ class _MainPageState extends State<MainPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
             NavigationItem(
+              index: 0,
               imageUrl: 'resources/icon_home.png',
               isSelected: true,
             ),
             NavigationItem(
+              index: 1,
               imageUrl: 'resources/icon_booking.png',
               isSelected: false,
             ),
             NavigationItem(
+              index: 2,
               imageUrl: 'resources/icon_cardmenu.png',
               isSelected: false,
             ),
             NavigationItem(
+              index: 3,
               imageUrl: 'resources/icon_settings.png',
               isSelected: false,
             ),
@@ -66,17 +86,21 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: SafeArea(
-        bottom: false,
-        child: Stack(
-          children: [
-            createBuildContent(context),
-            createCustomBottomNavigation(context)
-          ],
-        ),
-      ),
+    return BlocBuilder<PageCubit, int>(
+      builder: (context, stateCurrentIndex) {
+        return Scaffold(
+          backgroundColor: kBackgroundColor,
+          body: SafeArea(
+            bottom: false,
+            child: Stack(
+              children: [
+                createBuildContent(context, stateCurrentIndex),
+                createCustomBottomNavigation(context)
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

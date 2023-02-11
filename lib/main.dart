@@ -1,3 +1,4 @@
+import 'package:bwa_pesawats/cubits/cubit/page_cubit.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
 import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/pages/choose_seat_page.dart';
@@ -8,6 +9,7 @@ import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
 import 'package:bwa_pesawats/ui/pages/success_checkout_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const PesawatApp());
@@ -18,51 +20,58 @@ class PesawatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BWA Pesawat',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PageCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'BWA Pesawat',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: SplashPages.routeName,
+        routes: {
+          SplashPages.routeName: (context) {
+            return const SplashPages();
+          },
+          GetStartedPages.routeName: (context) {
+            return const GetStartedPages();
+          },
+          SignUpPage.routeName: (context) {
+            return const SignUpPage();
+          },
+          BonusPage.routeName: (context) {
+            return const BonusPage();
+          },
+          MainPage.routeName: (context) {
+            return const MainPage();
+          },
+          DetailDestination.routeName: (context) {
+            return const DetailDestination();
+          },
+          ChooseSeatPage.routeName: (context) {
+            return const ChooseSeatPage();
+          },
+          CheckoutPage.routeName: (context) {
+            return const CheckoutPage();
+          },
+          SuccessCheckoutPage.routeName: (context) {
+            return const SuccessCheckoutPage();
+          }
+        },
       ),
-      initialRoute: SplashPages.routeName,
-      routes: {
-        SplashPages.routeName: (context) {
-          return const SplashPages();
-        },
-        GetStartedPages.routeName: (context) {
-          return const GetStartedPages();
-        },
-        SignUpPage.routeName: (context) {
-          return const SignUpPage();
-        },
-        BonusPage.routeName: (context) {
-          return const BonusPage();
-        },
-        MainPage.routeName: (context) {
-          return const MainPage();
-        },
-        DetailDestination.routeName: (context) {
-          return const DetailDestination();
-        },
-        ChooseSeatPage.routeName: (context) {
-          return const ChooseSeatPage();
-        },
-        CheckoutPage.routeName: (context) {
-          return const CheckoutPage();
-        },
-        SuccessCheckoutPage.routeName: (context) {
-          return const SuccessCheckoutPage();
-        }
-      },
     );
   }
 }
