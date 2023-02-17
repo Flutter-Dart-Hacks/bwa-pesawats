@@ -1,4 +1,4 @@
-import 'package:bwa_pesawats/cubits/cubit/page_cubit.dart';
+import 'package:bwa_pesawats/cubits/page_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/home_pages.dart';
 import 'package:bwa_pesawats/ui/pages/settings_page.dart';
@@ -61,22 +61,18 @@ class _MainPageState extends State<MainPage> {
             NavigationItem(
               index: 0,
               imageUrl: 'resources/icon_home.png',
-              isSelected: true,
             ),
             NavigationItem(
               index: 1,
               imageUrl: 'resources/icon_booking.png',
-              isSelected: false,
             ),
             NavigationItem(
               index: 2,
               imageUrl: 'resources/icon_cardmenu.png',
-              isSelected: false,
             ),
             NavigationItem(
               index: 3,
               imageUrl: 'resources/icon_settings.png',
-              isSelected: false,
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:bwa_pesawats/cubits/cubit/page_cubit.dart';
+import 'package:bwa_pesawats/cubits/page_cubit.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
 import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/pages/choose_seat_page.dart';
@@ -8,10 +8,15 @@ import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
 import 'package:bwa_pesawats/ui/pages/success_checkout_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bwa_pesawats/firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const PesawatApp());
 }
 
