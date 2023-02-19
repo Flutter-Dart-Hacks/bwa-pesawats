@@ -1,6 +1,6 @@
-# bwa_pesawats
+# BWA Pesawat
 
-A new Flutter project.
+Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, dan Firebase.
 
 ## Getting Started
 
