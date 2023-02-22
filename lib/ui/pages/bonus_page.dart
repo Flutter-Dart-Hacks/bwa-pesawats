@@ -130,7 +130,8 @@ class _BonusPageState extends State<BonusPage> {
       return CustomButtonPrimary(
         title: 'Start Fly Now',
         onPressedFunction: () {
-          Navigator.pushNamed(context, MainPage.routeName);
+          Navigator.pushNamedAndRemoveUntil(
+              context, MainPage.routeName, (route) => false);
         },
         width: 220,
         margin: const EdgeInsets.only(top: 50),

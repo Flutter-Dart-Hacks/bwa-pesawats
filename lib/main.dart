@@ -1,3 +1,4 @@
+import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/cubits/page_cubit.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
 import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
@@ -29,6 +30,9 @@ class PesawatApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => PageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthsCubit(),
         ),
       ],
       child: MaterialApp(

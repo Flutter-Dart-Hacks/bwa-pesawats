@@ -1,8 +1,10 @@
+import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_text_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -25,6 +27,23 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final TextEditingController _controllerHobby =
       TextEditingController(text: '');
+
+  void showSnackbarToast(BuildContext context, {String message = ''}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: kRedColor,
+        action: SnackBarAction(
+          label: 'OK',
+          textColor: Colors.white,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,41 +103,46 @@ class _SignUpPageState extends State<SignUpPage> {
       }
 
       Widget submitButtonForm() {
-        // return Container(
-        //   width: double.infinity,
-        //   height: 55,
-        //   margin: const EdgeInsets.only(
-        //     top: 30,
-        //   ),
-        //   child: ElevatedButton(
-        //     onPressed: () {
-        //       Navigator.pushNamed(context, BonusPage.routeName);
-        //     },
-        //     style: ElevatedButton.styleFrom(
-        //       backgroundColor: kPrimaryColor,
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.all(
-        //           Radius.circular(defaultRadius),
-        //         ),
-        //       ),
-        //       elevation: 15,
-        //     ),
-        //     child: Text(
-        //       'Get Started',
-        //       style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium),
-        //     ),
-        //   ),
-        // );
-        return CustomButtonPrimary(
-            title: 'Get Started',
-            width: double.infinity,
-            margin: const EdgeInsets.only(
-              top: 30,
-              bottom: 80,
-            ),
-            onPressedFunction: () {
-              return Navigator.pushNamed(context, BonusPage.routeName);
-            });
+        return BlocConsumer<AuthsCubit, AuthsState>(
+          listener: (context, state) {
+            if (state is AuthsSuccess) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, BonusPage.routeName, (route) => false);
+            } else if (state is AuthsFailed) {
+              showSnackbarToast(context, message: state.errorMessage);
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return CustomButtonPrimary(
+                title: 'Get Started',
+                width: double.infinity,
+                margin: const EdgeInsets.only(
+                  top: 30,
+                  bottom: 80,
+                ),
+                onPressedFunction: () {
+                  if (_controllerEmail.text.isEmpty ||
+                      _controllerPassword.text.isEmpty ||
+                      _controllerFullName.text.isEmpty) {
+                    showSnackbarToast(context,
+                        message: 'Silahkan isi data dengan benar');
+                  } else {
+                    context.read<AuthsCubit>().signUpUser(
+                          email: _controllerEmail.text,
+                          password: _controllerPassword.text,
+                          name: _controllerFullName.text,
+                          hobby: _controllerHobby.text,
+                        );
+                  }
+                });
+          },
+        );
       }
 
       return Container(

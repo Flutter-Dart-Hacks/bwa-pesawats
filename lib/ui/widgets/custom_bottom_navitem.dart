@@ -11,8 +11,8 @@ class NavigationItem extends StatelessWidget {
   final String imageUrl;
 
   createColorBg(BuildContext context) {
-    print(
-        'Nilai indeks $index dengan state ${context.read<PageCubit>().state}');
+    // print(
+    //     'Nilai indeks $index dengan state ${context.read<PageCubit>().state}');
 
     return context.watch<PageCubit>().state == index
         ? kPrimaryColor
