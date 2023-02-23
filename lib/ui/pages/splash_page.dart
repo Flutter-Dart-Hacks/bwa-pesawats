@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
+import 'package:bwa_pesawats/ui/pages/main_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashPages extends StatefulWidget {
@@ -17,8 +19,15 @@ class _SplashPagesState extends State<SplashPages> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, GetStartedPages.routeName, (route) => false);
+      // mengambil user yang sedang aktif dari Firebase Instance
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, GetStartedPages.routeName, (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, MainPage.routeName, (route) => false);
+      }
     });
     super.initState();
   }

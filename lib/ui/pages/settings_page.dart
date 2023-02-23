@@ -1,3 +1,4 @@
+import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -9,8 +10,12 @@ class SettingsPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text('Settings Page'),
+        children: [
+          CustomButtonPrimary(
+            title: 'Sign Out',
+            width: 220,
+            onPressedFunction: () {},
+          )
         ],
       ),
     );

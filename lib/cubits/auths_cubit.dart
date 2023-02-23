@@ -25,4 +25,6 @@ class AuthsCubit extends Cubit<AuthsState> {
       emit(AuthsFailed(err.toString()));
     }
   }
+
+  void signOutUser() {}
 }

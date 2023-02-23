@@ -38,4 +38,6 @@ class AuthServices {
       throw Exception(err.toString());
     }
   }
+
+  void signOutRequest() {}
 }
