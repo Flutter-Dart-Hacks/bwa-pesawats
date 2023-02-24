@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashPages extends StatefulWidget {
   const SplashPages({super.key});
@@ -25,6 +27,8 @@ class _SplashPagesState extends State<SplashPages> {
         Navigator.pushNamedAndRemoveUntil(
             context, GetStartedPages.routeName, (route) => false);
       } else {
+        print(user.email);
+        context.read<AuthsCubit>().getCurrentUser(user.uid);
         Navigator.pushNamedAndRemoveUntil(
             context, MainPage.routeName, (route) => false);
       }

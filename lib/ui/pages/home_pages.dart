@@ -1,7 +1,9 @@
+import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/widgets/destination_card.dart';
 import 'package:bwa_pesawats/ui/widgets/destination_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePages extends StatefulWidget {
   const HomePages({super.key});
@@ -14,57 +16,65 @@ class _HomePagesState extends State<HomePages> {
   @override
   Widget build(BuildContext context) {
     Widget createHeader(BuildContext context) {
-      return Container(
-        margin: EdgeInsets.only(
-          left: defaultMargin,
-          right: defaultMargin,
-          top: 30,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return BlocBuilder<AuthsCubit, AuthsState>(
+        builder: (context, state) {
+          if (state is AuthsSuccess) {
+            return Container(
+              margin: EdgeInsets.only(
+                left: defaultMargin,
+                right: defaultMargin,
+                top: 30,
+              ),
+              child: Row(
                 children: [
-                  Text(
-                    'Howdy, \nJohn Doe',
-                    style: blackTextStyle.copyWith(
-                      fontWeight: semiBold,
-                      fontSize: 24,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Howdy, \n${state.userModel.name.toUpperCase()}',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: semiBold,
+                            fontSize: 24,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'Where to fly today?',
+                          style: greyTextStyle.copyWith(
+                              fontWeight: light, fontSize: 16),
+                        ),
+                      ],
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    'Where to fly today?',
-                    style:
-                        greyTextStyle.copyWith(fontWeight: light, fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('resources/image_profile.png'),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: kGreyColor,
-                    blurRadius: 18,
-                    spreadRadius: 0,
-                    offset: Offset(0, 3),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('resources/image_profile.png'),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: kGreyColor,
+                          blurRadius: 18,
+                          spreadRadius: 0,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
       );
     }
 

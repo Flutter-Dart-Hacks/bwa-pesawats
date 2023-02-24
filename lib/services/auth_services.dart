@@ -39,5 +39,11 @@ class AuthServices {
     }
   }
 
-  void signOutRequest() {}
+  Future<void> signOutRequest() async {
+    try {
+      await _auth.signOut();
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
 }
