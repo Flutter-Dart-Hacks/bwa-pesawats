@@ -5,6 +5,7 @@ import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/pages/choose_seat_page.dart';
 import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:bwa_pesawats/ui/pages/getstarted_page.dart';
+import 'package:bwa_pesawats/ui/pages/login_page.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/pages/splash_page.dart';
@@ -60,6 +61,9 @@ class PesawatApp extends StatelessWidget {
           },
           SignUpPage.routeName: (context) {
             return const SignUpPage();
+          },
+          LoginPage.routeName: (context) {
+            return const LoginPage();
           },
           BonusPage.routeName: (context) {
             return const BonusPage();

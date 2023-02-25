@@ -1,32 +1,26 @@
 import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
-import 'package:bwa_pesawats/ui/pages/login_page.dart';
+import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_text_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  static const String routeName = '/signup';
+  static const String routeName = '/login';
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController _controllerFullName =
-      TextEditingController(text: '');
-
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _controllerEmail =
       TextEditingController(text: '');
 
   final TextEditingController _controllerPassword =
-      TextEditingController(text: '');
-
-  final TextEditingController _controllerHobby =
       TextEditingController(text: '');
 
   void showSnackbarToast(BuildContext context, {String message = ''}) {
@@ -52,33 +46,23 @@ class _SignUpPageState extends State<SignUpPage> {
       return Container(
         margin: const EdgeInsets.only(top: 30),
         child: Text(
-          'Join us and get\nyour next journey',
+          'Sign In with your \nexisting account',
           style: blackTextStyle.copyWith(fontSize: 24, fontWeight: semiBold),
         ),
       );
     }
 
     Widget getInputSection() {
-      Widget setNamaLengkap() {
-        return CustomTextFormField(
-          controller: _controllerFullName,
-          title: 'Full Name',
-          hintTitle: 'insert your full name',
-          inputType: TextInputType.text,
-          margin: const EdgeInsets.only(
-            bottom: 20,
-            top: 20,
-          ),
-        );
-      }
-
       Widget setEmailAddress() {
         return CustomTextFormField(
           controller: _controllerEmail,
           title: 'Email Address',
           hintTitle: 'insert your email address',
           inputType: TextInputType.emailAddress,
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(
+            top: 20,
+            bottom: 20,
+          ),
         );
       }
 
@@ -90,16 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
           inputType: TextInputType.text,
           margin: const EdgeInsets.only(bottom: 20),
           isObscureText: true,
-        );
-      }
-
-      Widget setHobbyInput() {
-        return CustomTextFormField(
-          controller: _controllerHobby,
-          title: 'Hobby',
-          hintTitle: 'insert your hobby',
-          inputType: TextInputType.text,
-          margin: const EdgeInsets.only(bottom: 30),
         );
       }
 
@@ -121,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
             }
 
             return CustomButtonPrimary(
-                title: 'Get Started',
+                title: 'Sign In',
                 width: double.infinity,
                 margin: const EdgeInsets.only(
                   top: 30,
@@ -129,16 +103,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 onPressedFunction: () {
                   if (_controllerEmail.text.isEmpty ||
-                      _controllerPassword.text.isEmpty ||
-                      _controllerFullName.text.isEmpty) {
+                      _controllerPassword.text.isEmpty) {
                     showSnackbarToast(context,
                         message: 'Silahkan isi data dengan benar');
                   } else {
-                    context.read<AuthsCubit>().signUpUser(
+                    context.read<AuthsCubit>().signInUser(
                           email: _controllerEmail.text,
                           password: _controllerPassword.text,
-                          name: _controllerFullName.text,
-                          hobby: _controllerHobby.text,
                         );
                   }
                 });
@@ -160,17 +131,15 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         child: Column(
           children: [
-            setNamaLengkap(),
             setEmailAddress(),
             setPasswordInput(),
-            setHobbyInput(),
             submitButtonForm(),
           ],
         ),
       );
     }
 
-    Widget signInConditionWidget() {
+    Widget termConditionWidget() {
       return Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(
@@ -179,13 +148,14 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         child: TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, LoginPage.routeName);
+            Navigator.pushNamedAndRemoveUntil(
+                context, SignUpPage.routeName, (route) => false);
           },
           style: TextButton.styleFrom(
             foregroundColor: kGreyColor,
           ),
           child: Text(
-            'Have an account? Sign In',
+            'Don\'t have account? Sign Up',
             style: greyTextStyle.copyWith(
               fontWeight: light,
               fontSize: 16,
@@ -208,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               getTitle(),
               getInputSection(),
-              signInConditionWidget(),
+              termConditionWidget(),
             ],
           ),
         ),

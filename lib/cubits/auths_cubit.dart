@@ -37,6 +37,11 @@ class AuthsCubit extends Cubit<AuthsState> {
     }
   }
 
+  void signInUser({
+    required String email,
+    required String password,
+  }) {}
+
   void getCurrentUser(String id) async {
     try {
       emit(AuthsLoading());
