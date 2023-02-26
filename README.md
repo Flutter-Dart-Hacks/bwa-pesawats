@@ -1,6 +1,6 @@
 # BWA Pesawat
 
-Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, dan Firebase.
+Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, Flutter Fire, dan Firebase.
 
 ## Getting Started
 
