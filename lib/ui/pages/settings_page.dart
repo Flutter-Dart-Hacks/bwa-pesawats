@@ -1,6 +1,7 @@
 import 'package:bwa_pesawats/cubits/auths_cubit.dart';
+import 'package:bwa_pesawats/cubits/page_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
-import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
+import 'package:bwa_pesawats/ui/pages/login_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,8 +33,9 @@ class SettingsPage extends StatelessWidget {
         if (state is AuthsFailed) {
           showSnackbarToast(context, message: state.errorMessage);
         } else if (state is AuthsInitial) {
+          context.read<PageCubit>().setPage(0);
           Navigator.pushNamedAndRemoveUntil(
-              context, SignUpPage.routeName, (route) => false);
+              context, LoginPage.routeName, (route) => false);
         }
       },
       builder: (context, state) {

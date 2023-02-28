@@ -9,6 +9,17 @@ part 'auths_state.dart';
 class AuthsCubit extends Cubit<AuthsState> {
   AuthsCubit() : super(AuthsInitial());
 
+  void signInUser({required String email, required String password}) async {
+    try {
+      emit(AuthsLoading());
+      UserModel userModel =
+          await AuthServices().signInRequest(email: email, password: password);
+      emit(AuthsSuccess(userModel));
+    } catch (err) {
+      emit(AuthsFailed(err.toString()));
+    }
+  }
+
   void signUpUser({
     required String email,
     required String password,
@@ -36,11 +47,6 @@ class AuthsCubit extends Cubit<AuthsState> {
       emit(AuthsFailed(err.toString()));
     }
   }
-
-  void signInUser({
-    required String email,
-    required String password,
-  }) {}
 
   void getCurrentUser(String id) async {
     try {

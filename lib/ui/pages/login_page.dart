@@ -1,6 +1,6 @@
 import 'package:bwa_pesawats/cubits/auths_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
-import 'package:bwa_pesawats/ui/pages/bonus_page.dart';
+import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/pages/sign_up_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_text_formfield.dart';
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
           listener: (context, state) {
             if (state is AuthsSuccess) {
               Navigator.pushNamedAndRemoveUntil(
-                  context, BonusPage.routeName, (route) => false);
+                  context, MainPage.routeName, (route) => false);
             } else if (state is AuthsFailed) {
               showSnackbarToast(context, message: state.errorMessage);
             }
