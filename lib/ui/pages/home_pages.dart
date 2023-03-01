@@ -1,4 +1,6 @@
 import 'package:bwa_pesawats/cubits/auths_cubit.dart';
+import 'package:bwa_pesawats/cubits/destinations_cubit.dart';
+import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/widgets/destination_card.dart';
 import 'package:bwa_pesawats/ui/widgets/destination_list_item.dart';
@@ -13,6 +15,29 @@ class HomePages extends StatefulWidget {
 }
 
 class _HomePagesState extends State<HomePages> {
+  @override
+  void initState() {
+    context.read<DestinationsCubit>().fetchDestinations();
+    super.initState();
+  }
+
+  void showSnackbarToast(BuildContext context, {String message = ''}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: kRedColor,
+        action: SnackBarAction(
+          label: 'OK',
+          textColor: Colors.white,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget createHeader(BuildContext context) {
@@ -78,50 +103,35 @@ class _HomePagesState extends State<HomePages> {
       );
     }
 
-    Widget createPopulerDestination(BuildContext context) {
+    Widget createPopulerDestination(
+      BuildContext context,
+      List<DestinationsModel> destinationlist,
+    ) {
       return Container(
         margin: const EdgeInsets.only(top: 10),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: const [
-              DestinationCard(
-                name: 'Lake Ciliwung',
-                city: 'Tangerang',
-                imageUrl: 'resources/image_destination1.png',
-                rating: 4.8,
-              ),
-              DestinationCard(
-                name: 'White Houses',
-                city: 'Spain',
-                imageUrl: 'resources/image_destination2.png',
-                rating: 4.7,
-              ),
-              DestinationCard(
-                name: 'Hill Heyo',
-                city: 'Monaco',
-                imageUrl: 'resources/image_destination3.png',
-                rating: 4.8,
-              ),
-              DestinationCard(
-                name: 'Menarra',
-                city: 'Japan',
-                imageUrl: 'resources/image_destination4.png',
-                rating: 5.0,
-              ),
-              DestinationCard(
-                name: 'Payung Teduh',
-                city: 'Singapore',
-                imageUrl: 'resources/image_destination5.png',
-                rating: 4.8,
-              ),
-            ],
+            children: destinationlist.map(
+              (DestinationsModel destinationsModel) {
+                return DestinationCard(destinationsModel: destinationsModel);
+              },
+            ).toList(),
+            // children: const [
+            //   DestinationCard(
+            //     name: 'Lake Ciliwung',
+            //     city: 'Tangerang',
+            //     imageUrl: 'resources/image_destination1.png',
+            //     rating: 4.8,
+            //   ),
+            // ],
           ),
         ),
       );
     }
 
-    Widget createDestinationList(BuildContext context) {
+    Widget createDestinationList(
+        BuildContext context, List<DestinationsModel> listdestinations) {
       return Container(
         margin: EdgeInsets.only(
           top: 10,
@@ -137,50 +147,43 @@ class _HomePagesState extends State<HomePages> {
               style:
                   blackTextStyle.copyWith(fontSize: 18, fontWeight: semiBold),
             ),
-            const DestinationListItem(
-              name: 'Danau Beratan',
-              city: 'Singajara',
-              imageUrl: 'resources/image_destination6.png',
-              rating: 4.5,
-            ),
-            const DestinationListItem(
-              name: 'Sidney Opera',
-              city: 'Australia',
-              imageUrl: 'resources/image_destination7.png',
-              rating: 4.7,
-            ),
-            const DestinationListItem(
-              name: 'Roma',
-              city: 'Italy',
-              imageUrl: 'resources/image_destination8.png',
-              rating: 4.8,
-            ),
-            const DestinationListItem(
-              name: 'Payung Teduh',
-              city: 'Singapore',
-              imageUrl: 'resources/image_destination9.png',
-              rating: 4.5,
-            ),
-            const DestinationListItem(
-              name: 'Hill Hey',
-              city: 'Monaco',
-              imageUrl: 'resources/image_destination10.png',
-              rating: 4.7,
+            Column(
+              children: listdestinations.map(
+                (DestinationsModel destinationsModel) {
+                  return DestinationListItem(
+                      destinationsModel: destinationsModel);
+                },
+              ).toList(),
             ),
           ],
         ),
       );
     }
 
-    return Container(
-      margin: const EdgeInsets.all(0),
-      child: ListView(
-        children: [
-          createHeader(context),
-          createPopulerDestination(context),
-          createDestinationList(context),
-        ],
-      ),
+    return BlocConsumer<DestinationsCubit, DestinationsState>(
+      listener: (context, state) {
+        if (state is DestinationsFailed) {
+          showSnackbarToast(context, message: state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        if (state is DestinationsSuccess) {
+          return Container(
+            margin: const EdgeInsets.all(0),
+            child: ListView(
+              children: [
+                createHeader(context),
+                createPopulerDestination(context, state.destinations),
+                createDestinationList(context, state.destinations),
+              ],
+            ),
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

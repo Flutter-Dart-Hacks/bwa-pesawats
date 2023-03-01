@@ -1,19 +1,15 @@
+import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:flutter/material.dart';
 
 class DestinationListItem extends StatefulWidget {
-  const DestinationListItem(
-      {super.key,
-      required this.name,
-      required this.city,
-      required this.imageUrl,
-      required this.rating});
+  const DestinationListItem({
+    super.key,
+    required this.destinationsModel,
+  });
 
-  final String name;
-  final String city;
-  final String imageUrl;
-  final double rating;
+  final DestinationsModel destinationsModel;
 
   @override
   State<DestinationListItem> createState() => _DestinationListItemState();
@@ -54,7 +50,7 @@ class _DestinationListItemState extends State<DestinationListItem> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
-                  image: AssetImage(widget.imageUrl),
+                  image: NetworkImage(widget.destinationsModel.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -64,7 +60,7 @@ class _DestinationListItemState extends State<DestinationListItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.name,
+                    widget.destinationsModel.name,
                     style: blackTextStyle.copyWith(
                       fontWeight: medium,
                       fontSize: 18,
@@ -74,7 +70,7 @@ class _DestinationListItemState extends State<DestinationListItem> {
                     height: 5,
                   ),
                   Text(
-                    widget.city,
+                    widget.destinationsModel.city,
                     style:
                         greyTextStyle.copyWith(fontWeight: light, fontSize: 14),
                   ),
@@ -101,7 +97,7 @@ class _DestinationListItemState extends State<DestinationListItem> {
                     top: 3,
                   ),
                   child: Text(
-                    '${widget.rating}',
+                    '${widget.destinationsModel.rating}',
                     style: blackTextStyle.copyWith(
                       fontWeight: semiBold,
                       fontSize: 14,

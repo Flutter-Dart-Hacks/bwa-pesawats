@@ -27,7 +27,7 @@ class DestinationsModel extends Equatable {
       city: json['city'],
       imageUrl: json['imageUrl'] ?? '',
       price: json['price'] ?? 0,
-      rating: json['rating'] ?? 0.0,
+      rating: json['rating'].toDouble() ?? 0.0,
     );
   }
 

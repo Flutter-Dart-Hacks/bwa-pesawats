@@ -1,19 +1,12 @@
+import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:flutter/material.dart';
 
 class DestinationCard extends StatelessWidget {
-  const DestinationCard(
-      {super.key,
-      required this.name,
-      required this.city,
-      required this.imageUrl,
-      this.rating = 0.0});
+  const DestinationCard({super.key, required this.destinationsModel});
 
-  final String name;
-  final String city;
-  final String imageUrl;
-  final double rating;
+  final DestinationsModel destinationsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +47,7 @@ class DestinationCard extends StatelessWidget {
                   Radius.circular(15),
                 ),
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
+                  image: NetworkImage(destinationsModel.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -90,7 +83,7 @@ class DestinationCard extends StatelessWidget {
                           top: 3,
                         ),
                         child: Text(
-                          '$rating',
+                          '${destinationsModel.rating}',
                           style: blackTextStyle.copyWith(
                             fontWeight: medium,
                             fontSize: 14,
@@ -108,7 +101,7 @@ class DestinationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    destinationsModel.name,
                     style: blackTextStyle.copyWith(
                       fontWeight: semiBold,
                       fontSize: 18,
@@ -118,7 +111,7 @@ class DestinationCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    city,
+                    destinationsModel.city,
                     style: greyTextStyle.copyWith(
                       fontWeight: light,
                       fontSize: 14,
