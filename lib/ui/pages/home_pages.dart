@@ -117,14 +117,6 @@ class _HomePagesState extends State<HomePages> {
                 return DestinationCard(destinationsModel: destinationsModel);
               },
             ).toList(),
-            // children: const [
-            //   DestinationCard(
-            //     name: 'Lake Ciliwung',
-            //     city: 'Tangerang',
-            //     imageUrl: 'resources/image_destination1.png',
-            //     rating: 4.8,
-            //   ),
-            // ],
           ),
         ),
       );
