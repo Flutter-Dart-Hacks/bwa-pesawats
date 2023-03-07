@@ -2,6 +2,7 @@ import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/detail_destination_page.dart';
 import 'package:flutter/material.dart';
+import 'package:bwa_pesawats/models/detail_arguments.dart';
 
 class DestinationListItem extends StatefulWidget {
   const DestinationListItem({
@@ -20,7 +21,13 @@ class _DestinationListItemState extends State<DestinationListItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, DetailDestination.routeName);
+        Navigator.pushNamed(
+          context,
+          DetailDestination.routeName,
+          arguments: DetailArguments(
+            destinationsModel: widget.destinationsModel,
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(

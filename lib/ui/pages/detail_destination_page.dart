@@ -1,3 +1,5 @@
+import 'package:bwa_pesawats/models/destination_data.dart';
+import 'package:bwa_pesawats/models/detail_arguments.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/choose_seat_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
@@ -16,14 +18,23 @@ class DetailDestination extends StatefulWidget {
 
 class _DetailDestinationState extends State<DetailDestination> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DetailArguments? argsDetailData =
+        ModalRoute.of(context)?.settings.arguments as DetailArguments;
+    DestinationsModel destinationsModel = argsDetailData.destinationsModel;
+
     Widget createBackgroundImage() {
       return Container(
         width: double.infinity,
         height: 450,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('resources/image_destination1.png'),
+            image: NetworkImage(destinationsModel.imageUrl),
             fit: BoxFit.cover,
           ),
         ),
@@ -83,7 +94,7 @@ class _DetailDestinationState extends State<DetailDestination> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Lake Ciliwung',
+                          destinationsModel.name,
                           style: whiteTextStyle.copyWith(
                             fontWeight: semiBold,
                             fontSize: 24,
@@ -91,7 +102,7 @@ class _DetailDestinationState extends State<DetailDestination> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'Tangerang',
+                          destinationsModel.city,
                           style: whiteTextStyle.copyWith(
                             fontWeight: light,
                             fontSize: 16,
@@ -120,7 +131,7 @@ class _DetailDestinationState extends State<DetailDestination> {
                           top: 3,
                         ),
                         child: Text(
-                          '4.7',
+                          '${destinationsModel.rating}',
                           style: whiteTextStyle.copyWith(
                             fontWeight: medium,
                             fontSize: 14,
@@ -232,7 +243,7 @@ class _DetailDestinationState extends State<DetailDestination> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR 2.500.000',
+                          'IDR ${destinationsModel.price}',
                           style: blackTextStyle.copyWith(
                             fontWeight: semiBold,
                             fontSize: 18,
