@@ -192,9 +192,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 children: [
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'A1',
                   ),
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'B1',
                   ),
                   Container(
                     width: 48,
@@ -213,9 +215,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'C1',
                   ),
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'D1',
                   ),
                 ],
               ),
@@ -231,9 +235,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 children: [
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'A2',
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'B2',
                   ),
                   Container(
                     width: 48,
@@ -252,9 +258,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'C2',
                   ),
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'D2',
                   ),
                 ],
               ),
@@ -270,9 +278,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 children: [
                   const SeatItem(
                     statusSeat: statusSelected,
+                    id: 'A3',
                   ),
                   const SeatItem(
                     statusSeat: statusSelected,
+                    id: 'B3',
                   ),
                   Container(
                     width: 48,
@@ -291,9 +301,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'C3',
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'D3',
                   ),
                 ],
               ),
@@ -309,9 +321,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 children: [
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'A4',
                   ),
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'B4',
                   ),
                   Container(
                     width: 48,
@@ -330,9 +344,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'C4',
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'D4',
                   ),
                 ],
               ),
@@ -348,9 +364,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                 children: [
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'A5',
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'B5',
                   ),
                   Container(
                     width: 48,
@@ -369,9 +387,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                   ),
                   const SeatItem(
                     statusSeat: statusUnavailable,
+                    id: 'C5',
                   ),
                   const SeatItem(
                     statusSeat: statusAvailable,
+                    id: 'D5',
                   ),
                 ],
               ),

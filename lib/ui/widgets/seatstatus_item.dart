@@ -3,9 +3,10 @@ import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:flutter/material.dart';
 
 class SeatItem extends StatelessWidget {
-  const SeatItem({super.key, required this.statusSeat});
+  const SeatItem({super.key, required this.statusSeat, required this.id});
 
   final int statusSeat;
+  final String id;
 
   @override
   Widget build(BuildContext context) {

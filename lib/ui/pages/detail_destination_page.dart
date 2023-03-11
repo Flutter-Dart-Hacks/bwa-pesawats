@@ -6,6 +6,7 @@ import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/interest_item.dart';
 import 'package:bwa_pesawats/ui/widgets/photo_items.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailDestination extends StatefulWidget {
   const DetailDestination({super.key});
@@ -25,8 +26,10 @@ class _DetailDestinationState extends State<DetailDestination> {
   @override
   Widget build(BuildContext context) {
     DetailArguments? argsDetailData =
-        ModalRoute.of(context)?.settings.arguments as DetailArguments;
-    DestinationsModel destinationsModel = argsDetailData.destinationsModel;
+        ModalRoute.of(context)?.settings.arguments as DetailArguments?;
+    DestinationsModel destinationsModel = argsDetailData?.destinationsModel ??
+        const DestinationsModel(
+            id: 'id', name: 'name', city: 'city', imageUrl: 'imageUrl');
 
     Widget createBackgroundImage() {
       return Container(
@@ -243,7 +246,12 @@ class _DetailDestinationState extends State<DetailDestination> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR ${destinationsModel.price}',
+                          // 'IDR ${destinationsModel.price}',
+                          NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'IDR ',
+                            decimalDigits: 0,
+                          ).format(destinationsModel.price),
                           style: blackTextStyle.copyWith(
                             fontWeight: semiBold,
                             fontSize: 18,
