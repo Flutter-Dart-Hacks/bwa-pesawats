@@ -12,8 +12,7 @@ class SeatDataCubit extends Cubit<List<String>> {
     } else {
       state.add(id);
     }
-    print(state);
-    emit(state);
+    emit(List.from(state));
   }
 
   bool isSelectedSeat(String id) {

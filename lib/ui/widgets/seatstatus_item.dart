@@ -14,7 +14,6 @@ class SeatItem extends StatelessWidget {
     bool isSelected = context.watch<SeatDataCubit>().isSelectedSeat(id);
 
     getBackgroundColor() {
-      print(isSelected);
       if (!isAvailable) {
         return kUnavailableColor;
       } else {
