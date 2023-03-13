@@ -3,18 +3,21 @@ import 'package:equatable/equatable.dart';
 
 part 'seat_data_state.dart';
 
-class SeatDataCubit extends Cubit<SeatDataState> {
-  SeatDataCubit() : super(const SeatDataInitial([]));
+class SeatDataCubit extends Cubit<List<String>> {
+  SeatDataCubit() : super([]);
 
   void selectSeat(String id) {
-    List<String> listData = List.from(state.props);
-    listData.add(id);
-    state.props.add(id);
-    emit(SeatDataSelected(listData));
+    if (isSelectedSeat(id)) {
+      state.remove(id);
+    } else {
+      state.add(id);
+    }
+    print(state);
+    emit(state);
   }
 
   bool isSelectedSeat(String id) {
-    int indexSeat = state.props.indexOf(id);
+    int indexSeat = state.indexOf(id);
     if (indexSeat == -1) {
       return false;
     } else {
