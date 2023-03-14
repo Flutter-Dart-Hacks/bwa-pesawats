@@ -11,6 +11,10 @@ class DestinationsModel extends Equatable {
 // JSON Serialize tutorial
 // https://www.youtube.com/watch?v=WkZriOBlRAo
 // https://www.youtube.com/watch?v=4YhrDyXkpCI
+// object to json string
+// https://www.bezkoder.com/dart-flutter-convert-object-to-json-string/
+// json string to object
+// https://www.bezkoder.com/dart-flutter-parse-json-string-array-to-object-list/
   const DestinationsModel({
     required this.id,
     required this.name,
@@ -23,12 +27,23 @@ class DestinationsModel extends Equatable {
   factory DestinationsModel.fromJson(String id, Map<String, dynamic> json) {
     return DestinationsModel(
       id: id,
-      name: json['name'],
-      city: json['city'],
+      name: json['name'] is String ? json['name'] as String : '',
+      city: json['city'] is String ? json['name'] as String : '',
       imageUrl: json['imageUrl'] ?? '',
       price: json['price'] ?? 0,
       rating: json['rating'].toDouble() ?? 0.0,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'city': city,
+      'imageUrl': imageUrl,
+      'price': price,
+      'rating': rating,
+    };
   }
 
   @override

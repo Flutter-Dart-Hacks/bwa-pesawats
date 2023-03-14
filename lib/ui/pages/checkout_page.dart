@@ -1,8 +1,14 @@
+import 'package:bwa_pesawats/cubits/auths_cubit.dart';
+import 'package:bwa_pesawats/models/checkout_arguments.dart';
+import 'package:bwa_pesawats/models/destination_data.dart';
+import 'package:bwa_pesawats/models/transaction_model.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/success_checkout_page.dart';
 import 'package:bwa_pesawats/ui/widgets/booking_detail_item.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -16,6 +22,16 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
+    CheckoutArguments? checkoutArguments =
+        ModalRoute.of(context)?.settings.arguments as CheckoutArguments?;
+
+    TransactionModel transactionModel = checkoutArguments?.transactionModel ??
+        const TransactionModel(
+            destinationsModel: DestinationsModel(
+                id: 'id', name: 'name', city: 'city', imageUrl: 'imageUrl'));
+
+    DestinationsModel destinationsModel = transactionModel.destinationsModel;
+
     createRouteWidget() {
       return Container(
         margin: const EdgeInsets.only(
@@ -111,8 +127,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    image: const DecorationImage(
-                      image: AssetImage('resources/image_destination1.png'),
+                    image: DecorationImage(
+                      image: NetworkImage(destinationsModel.imageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -122,7 +138,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Lake Ciliwung',
+                        destinationsModel.name,
                         style: blackTextStyle.copyWith(
                           fontWeight: medium,
                           fontSize: 18,
@@ -132,7 +148,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         height: 5,
                       ),
                       Text(
-                        'Tangerang',
+                        destinationsModel.city,
                         style: greyTextStyle.copyWith(
                             fontWeight: light, fontSize: 14),
                       ),
@@ -159,7 +175,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         top: 3,
                       ),
                       child: Text(
-                        '4.8',
+                        '${destinationsModel.rating}',
                         style: blackTextStyle.copyWith(
                           fontWeight: semiBold,
                           fontSize: 14,
@@ -184,38 +200,49 @@ class _CheckoutPageState extends State<CheckoutPage> {
             ),
 
             // NOTE : BOOKING DETAILS ITEM
-            const BookingDetailItem(
+            BookingDetailItem(
                 title: 'Traveler',
-                valueText: '2 person',
+                valueText: '${transactionModel.amountTraveler} person',
                 valueColor: kBlackColor),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'Seat',
-              valueText: 'A3, B3',
+              valueText: transactionModel.selectedSeats,
               valueColor: kBlackColor,
             ),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'Insurance',
-              valueText: 'YES',
-              valueColor: kGreenColor,
+              valueText: transactionModel.isInsurance ? 'YES' : 'NO',
+              valueColor:
+                  transactionModel.isInsurance ? kGreenColor : kRedColor,
             ),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'Refundable',
-              valueText: 'NO',
-              valueColor: kRedColor,
+              valueText: transactionModel.isRefundable ? 'YES' : 'NO',
+              valueColor:
+                  transactionModel.isInsurance ? kGreenColor : kRedColor,
             ),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'VAT',
-              valueText: '45%',
+              valueText:
+                  '${(transactionModel.vatPercent * 100).toStringAsFixed(0)} %',
               valueColor: kBlackColor,
             ),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'Price',
-              valueText: 'IDR 8.500.690',
+              valueText: NumberFormat.currency(
+                locale: 'id',
+                symbol: 'IDR ',
+                decimalDigits: 0,
+              ).format(transactionModel.price),
               valueColor: kBlackColor,
             ),
-            const BookingDetailItem(
+            BookingDetailItem(
               title: 'Grand Total',
-              valueText: 'IDR 12.000.000',
+              valueText: NumberFormat.currency(
+                locale: 'id',
+                symbol: 'IDR ',
+                decimalDigits: 0,
+              ).format(transactionModel.grandTotal),
               valueColor: kPrimaryColor,
             ),
           ],
@@ -224,104 +251,117 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
 
     Widget createPaymentDetails() {
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 30),
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 30,
-          bottom: 30,
-        ),
-        decoration: const BoxDecoration(
-          color: kWhiteColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(18),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Payment Details',
-              style: blackTextStyle.copyWith(
-                fontWeight: semiBold,
-                fontSize: 16,
+      return BlocBuilder<AuthsCubit, AuthsState>(
+        builder: (context, state) {
+          if (state is AuthsSuccess) {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 30),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 30,
+                bottom: 30,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              child: Row(
+              decoration: const BoxDecoration(
+                color: kWhiteColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(18),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // NOTE CARD IMAGE
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: 100,
-                      height: 70,
-                      margin: const EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        image: const DecorationImage(
-                            image: AssetImage('resources/image_card.png'),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              margin: const EdgeInsets.only(right: 6),
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('resources/icon_plane.png'),
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Pay',
-                              style: whiteTextStyle.copyWith(
-                                fontWeight: medium,
-                                fontSize: 16,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                  Text(
+                    'Payment Details',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      fontSize: 16,
                     ),
                   ),
-
-                  // NOTE PRICE TOTAL BALANCE
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    margin: const EdgeInsets.only(top: 16),
+                    child: Row(
                       children: [
-                        Text(
-                          'IDR 80.400.000',
-                          style: blackTextStyle.copyWith(
-                            fontWeight: semiBold,
-                            fontSize: 18,
+                        // NOTE CARD IMAGE
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            width: 100,
+                            height: 70,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              image: const DecorationImage(
+                                  image: AssetImage('resources/image_card.png'),
+                                  fit: BoxFit.cover),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    margin: const EdgeInsets.only(right: 6),
+                                    decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'resources/icon_plane.png'),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Pay',
+                                    style: whiteTextStyle.copyWith(
+                                      fontWeight: medium,
+                                      fontSize: 16,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          'Current Balance',
-                          style: blackTextStyle.copyWith(
-                            fontWeight: light,
-                            fontSize: 14,
+
+                        // NOTE PRICE TOTAL BALANCE
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'IDR ',
+                                  decimalDigits: 0,
+                                ).format(state.userModel.balance),
+                                style: blackTextStyle.copyWith(
+                                  fontWeight: semiBold,
+                                  fontSize: 18,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                'Current Balance',
+                                style: blackTextStyle.copyWith(
+                                  fontWeight: light,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
                   )
                 ],
               ),
-            )
-          ],
-        ),
+            );
+          }
+
+          return const SizedBox();
+        },
       );
     }
 

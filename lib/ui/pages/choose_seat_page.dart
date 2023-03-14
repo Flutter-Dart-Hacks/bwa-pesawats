@@ -1,6 +1,8 @@
 import 'package:bwa_pesawats/cubits/seat_data_cubit.dart';
+import 'package:bwa_pesawats/models/checkout_arguments.dart';
 import 'package:bwa_pesawats/models/chooseseat_arguments.dart';
 import 'package:bwa_pesawats/models/destination_data.dart';
+import 'package:bwa_pesawats/models/transaction_model.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
@@ -459,18 +461,54 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
     }
 
     Widget createCheckoutButton() {
-      return Container(
-        margin: const EdgeInsets.only(
-          top: 30,
-          bottom: 50,
-        ),
-        width: double.infinity,
-        child: CustomButtonPrimary(
-          title: 'Continue to Checkout',
-          onPressedFunction: () {
-            Navigator.pushNamed(context, CheckoutPage.routeName);
-          },
-        ),
+      return BlocBuilder<SeatDataCubit, List<String>>(
+        builder: (context, state) {
+          return Container(
+            margin: const EdgeInsets.only(
+              top: 30,
+              bottom: 50,
+            ),
+            width: double.infinity,
+            child: CustomButtonPrimary(
+              title: 'Continue to Checkout',
+              onPressedFunction: () {
+                if (state.isNotEmpty) {
+                  Future.delayed(const Duration(seconds: 1), () {
+                    int totalPrice = destinationsModel.price * state.length;
+                    int grantTotal = totalPrice + (totalPrice * 0.45).toInt();
+                    return {
+                      'totalprice': totalPrice,
+                      'granttotal': grantTotal,
+                    };
+                  }).then((Map<String, int> value) {
+                    int totalPrice = value['totalprice'] ?? 0;
+                    int grantTotal = value['granttotal'] ?? 0;
+
+                    // Navigasi ke halaman checkout
+                    Navigator.pushNamed(
+                      context,
+                      CheckoutPage.routeName,
+                      arguments: CheckoutArguments(
+                        transactionModel: TransactionModel(
+                          destinationsModel: destinationsModel,
+                          amountTraveler: state.length,
+                          selectedSeats: state.join(', '),
+                          isInsurance: true,
+                          isRefundable: false,
+                          price: totalPrice,
+                          grandTotal: grantTotal,
+                          vatPercent: 0.45,
+                        ),
+                      ),
+                    );
+                  }).catchError((onError) {
+                    print(onError);
+                  });
+                }
+              },
+            ),
+          );
+        },
       );
     }
 
