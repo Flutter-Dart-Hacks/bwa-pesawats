@@ -1,3 +1,4 @@
+import 'package:bwa_pesawats/models/chooseseat_arguments.dart';
 import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/models/detail_arguments.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
@@ -274,7 +275,13 @@ class _DetailDestinationState extends State<DetailDestination> {
                     child: CustomButtonPrimary(
                       title: 'Book Now',
                       onPressedFunction: () {
-                        Navigator.pushNamed(context, ChooseSeatPage.routeName);
+                        Navigator.pushNamed(
+                          context,
+                          ChooseSeatPage.routeName,
+                          arguments: ChooseSeatArguments(
+                            destinationsModel: destinationsModel,
+                          ),
+                        );
                       },
                       width: double.infinity,
                     ),

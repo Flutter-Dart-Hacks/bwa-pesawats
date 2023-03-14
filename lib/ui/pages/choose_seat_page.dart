@@ -1,10 +1,13 @@
 import 'package:bwa_pesawats/cubits/seat_data_cubit.dart';
+import 'package:bwa_pesawats/models/chooseseat_arguments.dart';
+import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/checkout_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:bwa_pesawats/ui/widgets/seatstatus_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class ChooseSeatPage extends StatefulWidget {
   const ChooseSeatPage({super.key});
@@ -21,6 +24,17 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
 
   @override
   Widget build(BuildContext context) {
+    ChooseSeatArguments? argsChooseSeat =
+        ModalRoute.of(context)?.settings.arguments as ChooseSeatArguments?;
+
+    DestinationsModel destinationsModel = argsChooseSeat?.destinationsModel ??
+        const DestinationsModel(
+          id: 'id',
+          name: 'name',
+          city: 'city',
+          imageUrl: 'imageUrl',
+        );
+
     Widget createTitle() {
       return Container(
         margin: const EdgeInsets.only(top: 30),
@@ -220,6 +234,7 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                       ),
                       const SeatItem(
                         id: 'D1',
+                        isAvailable: false,
                       ),
                     ],
                   ),
@@ -397,7 +412,7 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                         ),
                       ),
                       Text(
-                        'A3, B3',
+                        state.isEmpty ? '-' : state.join(', '),
                         style: blackTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: semiBold,
@@ -423,7 +438,11 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                         ),
                       ),
                       Text(
-                        'IDR 540.000.000',
+                        NumberFormat.currency(
+                          locale: 'id',
+                          symbol: 'IDR ',
+                          decimalDigits: 0,
+                        ).format(state.length * destinationsModel.price),
                         style: purpleTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: bold,
