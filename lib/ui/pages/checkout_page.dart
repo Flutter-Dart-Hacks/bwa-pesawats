@@ -1,4 +1,5 @@
 import 'package:bwa_pesawats/cubits/auths_cubit.dart';
+import 'package:bwa_pesawats/cubits/transactions_cubit.dart';
 import 'package:bwa_pesawats/models/checkout_arguments.dart';
 import 'package:bwa_pesawats/models/destination_data.dart';
 import 'package:bwa_pesawats/models/transaction_model.dart';
@@ -20,6 +21,23 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
+  void showSnackbarToast(BuildContext context, {String message = ''}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: kRedColor,
+        action: SnackBarAction(
+          label: 'OK',
+          textColor: Colors.white,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     CheckoutArguments? checkoutArguments =
@@ -251,6 +269,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
 
     Widget createPaymentDetails() {
+      // Mengambil data status login dan saldo pengguna
       return BlocBuilder<AuthsCubit, AuthsState>(
         builder: (context, state) {
           if (state is AuthsSuccess) {
@@ -366,16 +385,38 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
 
     Widget createPaynowButton() {
-      return Container(
-        width: double.infinity,
-        height: 55,
-        margin: const EdgeInsets.only(bottom: 30),
-        child: CustomButtonPrimary(
-          title: 'Pay Now',
-          onPressedFunction: () {
-            Navigator.pushNamed(context, SuccessCheckoutPage.routeName);
-          },
-        ),
+      return BlocConsumer<TransactionsCubit, TransactionsState>(
+        listener: (context, state) {
+          if (state is TransactionsSuccess) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, SuccessCheckoutPage.routeName, (route) => false);
+          } else if (state is TransactionsFailed) {
+            showSnackbarToast(context, message: state.errorMessage);
+          }
+        },
+        builder: (context, state) {
+          if (state is TransactionsLoading) {
+            return Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 30),
+              child: const CircularProgressIndicator(),
+            );
+          }
+
+          return Container(
+            width: double.infinity,
+            height: 55,
+            margin: const EdgeInsets.only(bottom: 30),
+            child: CustomButtonPrimary(
+              title: 'Pay Now',
+              onPressedFunction: () {
+                context
+                    .read<TransactionsCubit>()
+                    .createTransaction(transactionModel);
+              },
+            ),
+          );
+        },
       );
     }
 

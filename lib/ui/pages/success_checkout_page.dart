@@ -1,7 +1,9 @@
+import 'package:bwa_pesawats/cubits/page_cubit.dart';
 import 'package:bwa_pesawats/shareds/themes.dart';
 import 'package:bwa_pesawats/ui/pages/main_page.dart';
 import 'package:bwa_pesawats/ui/widgets/custom_button_getstarted.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SuccessCheckoutPage extends StatelessWidget {
   const SuccessCheckoutPage({super.key});
@@ -58,6 +60,8 @@ class SuccessCheckoutPage extends StatelessWidget {
                 title: 'My Bookings',
                 width: 220,
                 onPressedFunction: () {
+                  context.read<PageCubit>().setPage(1);
+
                   Navigator.pushNamedAndRemoveUntil(
                       context, MainPage.routeName, (route) => false);
                 },
