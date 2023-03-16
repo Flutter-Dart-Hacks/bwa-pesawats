@@ -18,5 +18,20 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     }
   }
 
-  void fetchListTransaction() async {}
+  void fetchListTransaction() async {
+    try {
+      emit(TransactionsLoading());
+
+      List<TransactionModel> transactions = await Future.delayed(
+        const Duration(seconds: 2),
+        () async {
+          return await TransactionServices().fetchTransactionList();
+        },
+      );
+
+      emit(TransactionsSuccess(transactions));
+    } catch (err) {
+      emit(TransactionsFailed(err.toString()));
+    }
+  }
 }
