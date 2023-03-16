@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionCardItem extends StatelessWidget {
-  const TransactionCardItem({super.key, required this.transactionModel});
+  const TransactionCardItem(
+      {super.key, required this.transactionModel, required this.bottomMargin});
 
   final TransactionModel transactionModel;
+  final int bottomMargin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
+      margin: EdgeInsets.only(
         top: 30,
+        bottom: bottomMargin.toDouble(),
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
