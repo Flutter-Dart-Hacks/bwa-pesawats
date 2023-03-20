@@ -4,6 +4,8 @@ description: Aplikasi membuat pemesanan tiket pesawat dengan Flutter dan BWA Cou
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
+# Cara untuk menambahkan package dev dan package ke prod dependency
+# https://stackoverflow.com/questions/57213340/how-to-add-a-package-from-command-line
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
