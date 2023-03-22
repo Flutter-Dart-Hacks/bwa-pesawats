@@ -2,7 +2,7 @@
 
 Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, Flutter Fire, dan Firebase.
 
-## Getting Started
+## Menjalankan Project
 
 This project is a starting point for a Flutter application.
 
