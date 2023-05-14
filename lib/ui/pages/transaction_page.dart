@@ -39,11 +39,11 @@ class _TransactionPageState extends State<TransactionPage> {
           );
         } else if (state is TransactionsSuccess) {
           if (state.list.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text('Transactions not Available'),
                 ],
               ),
@@ -66,11 +66,11 @@ class _TransactionPageState extends State<TransactionPage> {
           }
         }
 
-        return Center(
+        return const Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text('Transaction Page'),
             ],
           ),

@@ -191,12 +191,12 @@ class _DetailDestinationState extends State<DetailDestination> {
                   const SizedBox(
                     height: 6,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: const [
+                        children: [
                           PhotoItems(imageUrl: 'resources/image_photo1.png'),
                           PhotoItems(imageUrl: 'resources/image_photo2.png'),
                           PhotoItems(imageUrl: 'resources/image_photo3.png'),
@@ -217,14 +217,14 @@ class _DetailDestinationState extends State<DetailDestination> {
                   const SizedBox(
                     height: 6,
                   ),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       InterestsItem(interestName: 'Kids Park'),
                       InterestsItem(interestName: 'Honor Bridge')
                     ],
                   ),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       InterestsItem(interestName: 'City Museum'),
                       InterestsItem(interestName: 'Central Mall')
                     ],

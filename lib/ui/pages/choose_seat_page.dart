@@ -502,7 +502,7 @@ class _ChooseSeatPageState extends State<ChooseSeatPage> {
                       ),
                     );
                   }).catchError((onError) {
-                    print(onError);
+                    // print(onError);
                   });
                 }
               },

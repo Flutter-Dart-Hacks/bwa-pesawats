@@ -55,9 +55,9 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
+          children: [
             NavigationItem(
               index: 0,
               imageUrl: 'resources/icon_home.png',

@@ -102,11 +102,11 @@ class WalletPage extends StatelessWidget {
           );
         }
 
-        return Center(
+        return const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Text('Wallet Page'),
             ],
           ),
