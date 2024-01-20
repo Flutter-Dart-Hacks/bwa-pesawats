@@ -1,4 +1,4 @@
-# BWA Pesawat
+# Aplikasi BWA Pesawat
 
 Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, Flutter Fire, dan Firebase. Menggunakan Dart 3.x.
 
