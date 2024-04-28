@@ -2,7 +2,7 @@
 
 Membuat aplikasi pemesanan tiket pesawat dengan Flutter, BLOC Cubit, Flutter Fire, dan Firebase. Menggunakan bahasa Dart 3.x.
 
-## Menjalankan Project
+## Menjalankan Project BWA Pesawat
 
 This project is a starting point for a Flutter application.
 
